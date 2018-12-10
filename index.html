@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>8TK DEMO</title>
+</head>
+<body>
+  正在获取最新版本...
+  <script>
+    var xhr = new XMLHttpRequest()
+    xhr.open('GET', 'versions.json?ts=' + Date.now())
+    xhr.onload = function (e) {
+      var j = JSON.parse(xhr.responseText)
+      var v = j[j.length - 1]
+      var vr = v.version.release
+      location.replace('v' + vr + '/')
+    }
+    xhr.send()
+  </script>
+</body>
+</html>
