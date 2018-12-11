@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>-=[8TK DEMO 版本列表]=-</title>
+</head>
+<body>
+  <p id="loading">正在载入</p>
+  <ul id="versions"></ul>
+  <script>
+    (async function () {
+      const res = await fetch('versions.json?v=' + Date.now())
+      const json = await res.json()
+      json.reverse().forEach(j => {
+        const el = document.createElement('li')
+        const name = document.createElement('a')
+        name.innerText = `v${j.version.release}`
+        if (j.version.time) {
+          const t = new Date(j.version.time)
+          name.innerText += ` ${t.getYear()+1900}${t.getMonth()+1}${t.getDate()}`
+        }
+        name.href = `v${j.version.release}/`
+        const notes = document.createElement('pre')
+        notes.innerText = j.notes
+        el.appendChild(name)
+        el.appendChild(notes)
+        versions.appendChild(el)
+      })
+      loading.remove()
+    })();
+  </script>
+</body>
+</html>
