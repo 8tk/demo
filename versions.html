@@ -17,8 +17,8 @@
         const el = document.createElement('li')
         const name = document.createElement('a')
         name.innerText = `v${j.version.release}`
-        if (j.version.time) {
-          const t = new Date(j.version.time)
+        if (j.time) {
+          const t = new Date(j.time)
           name.innerText += ` ${t.getYear()+1900}${t.getMonth()+1}${t.getDate()}`
         }
         name.href = `v${j.version.release}/`
